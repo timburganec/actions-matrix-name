@@ -41,13 +41,13 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        whawha:
+        wahwah:
           - 'assets:precompile'
           - 'brakeman'
           - 'rubocop'
           - 'flay'
           - 'bundle_audit'
-        run: [ 'echo "$whawha"' ]
+        run: [ 'echo "$TASK"' ]
         db: ['']
         include:
           - task: 'db:create test:migrate_without_plugins'
@@ -74,7 +74,7 @@ jobs:
               export BINDIR=$(pwd) && curl -H 'Cache-Control:no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
               ([[ -z "$FOSSA_API_KEY" ]] && [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]) || (./fossa init && ./fossa analyze)
     steps:
-    - name: ${{ matrix.whawha }} ${{ matrix.db }}
+    - name: ${{ matrix.wahwah }} # ${{ matrix.db }}
       env:
         FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
         TASK: ${{ matrix.task }}
