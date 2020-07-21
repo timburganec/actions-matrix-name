@@ -9,7 +9,7 @@ on:
 jobs:
   main:
     # name: ruby-matrix-mysql
-    name: boom ${{ matrix.wahwah }}
+    name: boom ${{ matrix.task }}
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        wahwah:
+        task:
           - 'assets:precompile'
           - 'brakeman'
           - 'rubocop'
