@@ -9,7 +9,7 @@ on:
 jobs:
   main:
     # name: ruby-matrix-mysql
-    name: boom ${{ matrix.display }}
+    name: boom ${{ matrix.wahwah }}
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -51,31 +51,26 @@ jobs:
         run: [ 'echo "$TASK"' ]
         db: ['']
         include:
-          - display: 'aaa'
-            task: 'db:create test:migrate_without_plugins'
+          - task: 'db:create test:migrate_without_plugins'
             run: |
               export PLUGINS='' DATABASE_URL=mysql2://travis@127.0.0.1/samson_test?reconnect=true BUNDLE_WITHOUT=postgres:sqlite USE_UTF8MB4=1 SILENCE_MIGRATIONS=1
             db: mysql no plugin
-          - display: 'bbb'
-            task: 'db:create db:migrate default'
+          - task: 'db:create db:migrate default'
             run: |
               export DATABASE_URL=mysql2://travis@127.0.0.1/samson_test?reconnect=true BUNDLE_WITHOUT=postgres:sqlite USE_UTF8MB4=1 SILENCE_MIGRATIONS=1
               # bundle exec rake $TASK
             db: mysql
-          - display: 'ccc'
-            task: 'db:create db:migrate default'
+          - task: 'db:create db:migrate default'
             run: |
               export DATABASE_URL=postgresql://postgres@127.0.0.1/samson_test BUNDLE_WITHOUT=mysql:sqlite SILENCE_MIGRATIONS=1
               # bundle exec rake $TASK
             db: postgres
-          - display: 'ddd'
-            task: 'db:create db:migrate default'
+          - task: 'db:create db:migrate default'
             run: |
               export DATABASE_URL=sqlite3://null$PWD/db/test.sqlite3 BUNDLE_WITHOUT=postgres:mysql SILENCE_MIGRATIONS=1
               # bundle exec rake $TASK
             db: sqlite3
-          - display: 'eee'
-            task: fossa
+          - task: fossa
             run: |
               export BINDIR=$(pwd) && curl -H 'Cache-Control:no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
               ([[ -z "$FOSSA_API_KEY" ]] && [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]) || (./fossa init && ./fossa analyze)
