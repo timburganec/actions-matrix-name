@@ -8,7 +8,8 @@ on:
 
 jobs:
   main:
-    name: ruby-matrix-mysql
+    # name: ruby-matrix-mysql
+    name: boom ${{ matrix.name }}
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -78,7 +79,6 @@ jobs:
             run: |
               export BINDIR=$(pwd) && curl -H 'Cache-Control:no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
               ([[ -z "$FOSSA_API_KEY" ]] && [[ "$GITHUB_EVENT_NAME" != "pull_request" ]]) || (./fossa init && ./fossa analyze)
-    name: boom ${{ matrix.name }}
     steps:
     - name: Run # ${{ matrix.task }} ${{ matrix.db }}
       env:
